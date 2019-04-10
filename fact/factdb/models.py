@@ -1,7 +1,7 @@
 from peewee import (
     Model,
     FloatField, IntegerField, DateTimeField, CharField, BigIntegerField,
-    PrimaryKeyField, CompositeKey
+    PrimaryKeyField, CompositeKey, fn
 )
 
 from .database import factdata_db
@@ -12,19 +12,19 @@ class FactDataModel(Model):
 
 
 class AnalysisResultsNightISDC(FactDataModel):
-    fnight = IntegerField(column_name='fNight')
-    fnumbgevts = FloatField(column_name='fNumBgEvts', null=True)
-    fnumevtsafterbgcuts = IntegerField(column_name='fNumEvtsAfterBgCuts', null=True)
-    fnumevtsaftercleaning = IntegerField(column_name='fNumEvtsAfterCleaning', null=True)
-    fnumevtsafterqualcuts = IntegerField(column_name='fNumEvtsAfterQualCuts', null=True)
-    fnumexcevts = FloatField(column_name='fNumExcEvts', null=True)
-    fnumislandsmean = FloatField(column_name='fNumIslandsMean', null=True)
-    fnumsigevts = FloatField(column_name='fNumSigEvts', null=True)
-    fontimeaftercuts = FloatField(column_name='fOnTimeAfterCuts', null=True)
-    fsourcekey = IntegerField(column_name='fSourceKey')
+    fnight = IntegerField(db_column='fNight')
+    fnumbgevts = FloatField(db_column='fNumBgEvts', null=True)
+    fnumevtsafterbgcuts = IntegerField(db_column='fNumEvtsAfterBgCuts', null=True)
+    fnumevtsaftercleaning = IntegerField(db_column='fNumEvtsAfterCleaning', null=True)
+    fnumevtsafterqualcuts = IntegerField(db_column='fNumEvtsAfterQualCuts', null=True)
+    fnumexcevts = FloatField(db_column='fNumExcEvts', null=True)
+    fnumislandsmean = FloatField(db_column='fNumIslandsMean', null=True)
+    fnumsigevts = FloatField(db_column='fNumSigEvts', null=True)
+    fontimeaftercuts = FloatField(db_column='fOnTimeAfterCuts', null=True)
+    fsourcekey = IntegerField(db_column='fSourceKey')
 
     class Meta:
-        table_name = 'AnalysisResultsNightISDC'
+        db_table = 'AnalysisResultsNightISDC'
         indexes = (
             (('fsourcekey', 'fnight'), True),
         )
@@ -32,19 +32,19 @@ class AnalysisResultsNightISDC(FactDataModel):
 
 
 class AnalysisResultsNightLP(FactDataModel):
-    fnight = IntegerField(column_name='fNight')
-    fnumbgevts = FloatField(column_name='fNumBgEvts', null=True)
-    fnumevtsafterbgcuts = IntegerField(column_name='fNumEvtsAfterBgCuts', null=True)
-    fnumevtsaftercleaning = IntegerField(column_name='fNumEvtsAfterCleaning', null=True)
-    fnumevtsafterqualcuts = IntegerField(column_name='fNumEvtsAfterQualCuts', null=True)
-    fnumexcevts = FloatField(column_name='fNumExcEvts', null=True)
-    fnumislandsmean = FloatField(column_name='fNumIslandsMean', null=True)
-    fnumsigevts = FloatField(column_name='fNumSigEvts', null=True)
-    fontimeaftercuts = FloatField(column_name='fOnTimeAfterCuts', null=True)
-    fsourcekey = IntegerField(column_name='fSourceKey')
+    fnight = IntegerField(db_column='fNight')
+    fnumbgevts = FloatField(db_column='fNumBgEvts', null=True)
+    fnumevtsafterbgcuts = IntegerField(db_column='fNumEvtsAfterBgCuts', null=True)
+    fnumevtsaftercleaning = IntegerField(db_column='fNumEvtsAfterCleaning', null=True)
+    fnumevtsafterqualcuts = IntegerField(db_column='fNumEvtsAfterQualCuts', null=True)
+    fnumexcevts = FloatField(db_column='fNumExcEvts', null=True)
+    fnumislandsmean = FloatField(db_column='fNumIslandsMean', null=True)
+    fnumsigevts = FloatField(db_column='fNumSigEvts', null=True)
+    fontimeaftercuts = FloatField(db_column='fOnTimeAfterCuts', null=True)
+    fsourcekey = IntegerField(db_column='fSourceKey')
 
     class Meta:
-        table_name = 'AnalysisResultsNightLP'
+        db_table = 'AnalysisResultsNightLP'
         indexes = (
             (('fsourcekey', 'fnight'), True),
         )
@@ -52,21 +52,43 @@ class AnalysisResultsNightLP(FactDataModel):
 
 
 class AnalysisResultsRunISDC(FactDataModel):
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fnumbgevts = FloatField(column_name='fNumBgEvts', null=True)
-    fnumevtsafterantithetacut = FloatField(column_name='fNumEvtsAfterAntiThetaCut')
-    fnumevtsafterbgcuts = IntegerField(column_name='fNumEvtsAfterBgCuts', null=True)
-    fnumevtsaftercleaning = IntegerField(column_name='fNumEvtsAfterCleaning', null=True)
-    fnumevtsafterqualcuts = IntegerField(column_name='fNumEvtsAfterQualCuts', null=True)
-    fnumexcevts = FloatField(column_name='fNumExcEvts', null=True)
-    fnumislandsmean = FloatField(column_name='fNumIslandsMean', null=True)
-    fnumsigevts = FloatField(column_name='fNumSigEvts', null=True)
-    fontimeaftercuts = FloatField(column_name='fOnTimeAfterCuts', null=True)
-    frunid = IntegerField(column_name='fRunID')
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fnumbgevts = FloatField(db_column='fNumBgEvts', null=True)
+    fnumevtsafterantithetacut = FloatField(db_column='fNumEvtsAfterAntiThetaCut')
+    fnumevtsafterbgcuts = IntegerField(db_column='fNumEvtsAfterBgCuts', null=True)
+    fnumevtsaftercleaning = IntegerField(db_column='fNumEvtsAfterCleaning', null=True)
+    fnumevtsafterqualcuts = IntegerField(db_column='fNumEvtsAfterQualCuts', null=True)
+    fnumexcevts = FloatField(db_column='fNumExcEvts', null=True)
+    fnumislandsmean = FloatField(db_column='fNumIslandsMean', null=True)
+    fnumsigevts = FloatField(db_column='fNumSigEvts', null=True)
+    fontimeaftercuts = FloatField(db_column='fOnTimeAfterCuts', null=True)
+    frunid = IntegerField(db_column='fRunID')
 
     class Meta:
-        table_name = 'AnalysisResultsRunISDC'
+        db_table = 'AnalysisResultsRunISDC'
+        indexes = (
+            (('frunid', 'fnight'), True),
+        )
+        primary_key = CompositeKey('fnight', 'frunid')
+
+
+class AnalysisResultsRunCutsLC(FactDataModel):
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fnumbgevts = FloatField(db_column='fNumBgEvts', null=True)
+    fnumevtsafterantithetacut = FloatField(db_column='fNumEvtsAfterAntiThetaCut')
+    fnumevtsafterbgcuts = IntegerField(db_column='fNumEvtsAfterBgCuts', null=True)
+    fnumevtsaftercleaning = IntegerField(db_column='fNumEvtsAfterCleaning', null=True)
+    fnumevtsafterqualcuts = IntegerField(db_column='fNumEvtsAfterQualCuts', null=True)
+    fnumexcevts = FloatField(db_column='fNumExcEvts', null=True)
+    fnumislandsmean = FloatField(db_column='fNumIslandsMean', null=True)
+    fnumsigevts = FloatField(db_column='fNumSigEvts', null=True)
+    fontimeaftercuts = FloatField(db_column='fOnTimeAfterCuts', null=True)
+    frunid = IntegerField(db_column='fRunID')
+
+    class Meta:
+        db_table = 'AnalysisResultsRunCutsLC'
         indexes = (
             (('frunid', 'fnight'), True),
         )
@@ -74,20 +96,20 @@ class AnalysisResultsRunISDC(FactDataModel):
 
 
 class AnalysisResultsRunLP(FactDataModel):
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fnumbgevts = FloatField(column_name='fNumBgEvts', null=True)
-    fnumevtsafterbgcuts = IntegerField(column_name='fNumEvtsAfterBgCuts', null=True)
-    fnumevtsaftercleaning = IntegerField(column_name='fNumEvtsAfterCleaning', null=True)
-    fnumevtsafterqualcuts = IntegerField(column_name='fNumEvtsAfterQualCuts', null=True)
-    fnumexcevts = FloatField(column_name='fNumExcEvts', null=True)
-    fnumislandsmean = FloatField(column_name='fNumIslandsMean', null=True)
-    fnumsigevts = FloatField(column_name='fNumSigEvts', null=True)
-    fontimeaftercuts = FloatField(column_name='fOnTimeAfterCuts', null=True)
-    frunid = IntegerField(column_name='fRunID')
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fnumbgevts = FloatField(db_column='fNumBgEvts', null=True)
+    fnumevtsafterbgcuts = IntegerField(db_column='fNumEvtsAfterBgCuts', null=True)
+    fnumevtsaftercleaning = IntegerField(db_column='fNumEvtsAfterCleaning', null=True)
+    fnumevtsafterqualcuts = IntegerField(db_column='fNumEvtsAfterQualCuts', null=True)
+    fnumexcevts = FloatField(db_column='fNumExcEvts', null=True)
+    fnumislandsmean = FloatField(db_column='fNumIslandsMean', null=True)
+    fnumsigevts = FloatField(db_column='fNumSigEvts', null=True)
+    fontimeaftercuts = FloatField(db_column='fOnTimeAfterCuts', null=True)
+    frunid = IntegerField(db_column='fRunID')
 
     class Meta:
-        table_name = 'AnalysisResultsRunLP'
+        db_table = 'AnalysisResultsRunLP'
         indexes = (
             (('frunid', 'fnight'), True),
         )
@@ -95,83 +117,83 @@ class AnalysisResultsRunLP(FactDataModel):
 
 
 class AutoSchedule(FactDataModel):
-    fdata = CharField(column_name='fData', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fmeasurementid = IntegerField(column_name='fMeasurementID')
-    fmeasurementtypekey = IntegerField(column_name='fMeasurementTypeKey')
-    fscheduleid = PrimaryKeyField(column_name='fScheduleID')
-    fsourcekey = IntegerField(column_name='fSourceKey', null=True)
-    fstart = DateTimeField(column_name='fStart')
-    fuser = CharField(column_name='fUser')
+    fdata = CharField(db_column='fData', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fmeasurementid = IntegerField(db_column='fMeasurementID')
+    fmeasurementtypekey = IntegerField(db_column='fMeasurementTypeKey')
+    fscheduleid = PrimaryKeyField(db_column='fScheduleID')
+    fsourcekey = IntegerField(db_column='fSourceKey', null=True)
+    fstart = DateTimeField(db_column='fStart')
+    fuser = CharField(db_column='fUser')
 
     class Meta:
-        table_name = 'AutoSchedule'
+        db_table = 'AutoSchedule'
         indexes = (
             (('fstart', 'fmeasurementid'), True),
         )
 
 
 class AuxDataInsertStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = PrimaryKeyField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = PrimaryKeyField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'AuxDataInsertStatus'
+        db_table = 'AuxDataInsertStatus'
 
 
 class AuxFilesAvailISDCStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = PrimaryKeyField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = PrimaryKeyField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'AuxFilesAvailISDCStatus'
+        db_table = 'AuxFilesAvailISDCStatus'
 
 
 class Calibration(FactDataModel):
-    fcaldev = FloatField(column_name='fCalDev', null=True)
-    fcalerrdev = FloatField(column_name='fCalErrDev', null=True)
-    fcalerrmed = FloatField(column_name='fCalErrMed', null=True)
-    fcalmed = FloatField(column_name='fCalMed', null=True)
-    fcalvstmdev = FloatField(column_name='fCalVsTmDev', null=True)
-    fcalvstmmean = FloatField(column_name='fCalVsTmMean', null=True)
-    fcalvstmmed = FloatField(column_name='fCalVsTmMed', null=True)
-    fcalvstmrms = FloatField(column_name='fCalVsTmRms', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fpedextdev = FloatField(column_name='fPedExtDev', null=True)
-    fpedexterrdev = FloatField(column_name='fPedExtErrDev', null=True)
-    fpedexterrmed = FloatField(column_name='fPedExtErrMed', null=True)
-    fpedextmed = FloatField(column_name='fPedExtMed', null=True)
-    fpedrndmdev = FloatField(column_name='fPedRndmDev', null=True)
-    fpedrndmerrdev = FloatField(column_name='fPedRndmErrDev', null=True)
-    fpedrndmerrmed = FloatField(column_name='fPedRndmErrMed', null=True)
-    fpedrndmmed = FloatField(column_name='fPedRndmMed', null=True)
-    frunstart = DateTimeField(column_name='fRunStart', null=True)
-    fsequenceid = IntegerField(column_name='fSequenceID')
-    ftmcaldev = FloatField(column_name='fTmCalDev', null=True)
-    ftmcalerrdev = FloatField(column_name='fTmCalErrDev', null=True)
-    ftmcalerrmed = FloatField(column_name='fTmCalErrMed', null=True)
-    ftmcalmed = FloatField(column_name='fTmCalMed', null=True)
-    ftmvstmdev = FloatField(column_name='fTmVsTmDev', null=True)
-    ftmvstmmean = FloatField(column_name='fTmVsTmMean', null=True)
-    ftmvstmmed = FloatField(column_name='fTmVsTmMed', null=True)
-    ftmvstmrms = FloatField(column_name='fTmVsTmRms', null=True)
-    fzenithdistance = IntegerField(column_name='fZenithDistance', null=True)
+    fcaldev = FloatField(db_column='fCalDev', null=True)
+    fcalerrdev = FloatField(db_column='fCalErrDev', null=True)
+    fcalerrmed = FloatField(db_column='fCalErrMed', null=True)
+    fcalmed = FloatField(db_column='fCalMed', null=True)
+    fcalvstmdev = FloatField(db_column='fCalVsTmDev', null=True)
+    fcalvstmmean = FloatField(db_column='fCalVsTmMean', null=True)
+    fcalvstmmed = FloatField(db_column='fCalVsTmMed', null=True)
+    fcalvstmrms = FloatField(db_column='fCalVsTmRms', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fpedextdev = FloatField(db_column='fPedExtDev', null=True)
+    fpedexterrdev = FloatField(db_column='fPedExtErrDev', null=True)
+    fpedexterrmed = FloatField(db_column='fPedExtErrMed', null=True)
+    fpedextmed = FloatField(db_column='fPedExtMed', null=True)
+    fpedrndmdev = FloatField(db_column='fPedRndmDev', null=True)
+    fpedrndmerrdev = FloatField(db_column='fPedRndmErrDev', null=True)
+    fpedrndmerrmed = FloatField(db_column='fPedRndmErrMed', null=True)
+    fpedrndmmed = FloatField(db_column='fPedRndmMed', null=True)
+    frunstart = DateTimeField(db_column='fRunStart', null=True)
+    fsequenceid = IntegerField(db_column='fSequenceID')
+    ftmcaldev = FloatField(db_column='fTmCalDev', null=True)
+    ftmcalerrdev = FloatField(db_column='fTmCalErrDev', null=True)
+    ftmcalerrmed = FloatField(db_column='fTmCalErrMed', null=True)
+    ftmcalmed = FloatField(db_column='fTmCalMed', null=True)
+    ftmvstmdev = FloatField(db_column='fTmVsTmDev', null=True)
+    ftmvstmmean = FloatField(db_column='fTmVsTmMean', null=True)
+    ftmvstmmed = FloatField(db_column='fTmVsTmMed', null=True)
+    ftmvstmrms = FloatField(db_column='fTmVsTmRms', null=True)
+    fzenithdistance = IntegerField(db_column='fZenithDistance', null=True)
 
     class Meta:
-        table_name = 'Calibration'
+        db_table = 'Calibration'
         indexes = (
             (('fnight', 'fsequenceid'), True),
         )
@@ -179,12 +201,12 @@ class Calibration(FactDataModel):
 
 
 class CalibrationInfo(FactDataModel):
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fsequenceid = IntegerField(column_name='fSequenceID')
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fsequenceid = IntegerField(db_column='fSequenceID')
 
     class Meta:
-        table_name = 'CalibrationInfo'
+        db_table = 'CalibrationInfo'
         indexes = (
             (('fnight', 'fsequenceid'), True),
         )
@@ -192,18 +214,18 @@ class CalibrationInfo(FactDataModel):
 
 
 class CallistoStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fsequenceid = IntegerField(column_name='fSequenceID')
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fsequenceid = IntegerField(db_column='fSequenceID')
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'CallistoStatus'
+        db_table = 'CallistoStatus'
         indexes = (
             (('fnight', 'fsequenceid'), True),
         )
@@ -211,18 +233,18 @@ class CallistoStatus(FactDataModel):
 
 
 class CallistoWueStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fsequenceid = IntegerField(column_name='fSequenceID')
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fsequenceid = IntegerField(db_column='fSequenceID')
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'CallistoWueStatus'
+        db_table = 'CallistoWueStatus'
         indexes = (
             (('fnight', 'fsequenceid'), True),
         )
@@ -230,55 +252,55 @@ class CallistoWueStatus(FactDataModel):
 
 
 class DriveFileAvailISDCStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = PrimaryKeyField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = PrimaryKeyField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'DriveFileAvailISDCStatus'
+        db_table = 'DriveFileAvailISDCStatus'
 
 
 class DriveFileAvailWueStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = PrimaryKeyField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = PrimaryKeyField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'DriveFileAvailWueStatus'
+        db_table = 'DriveFileAvailWueStatus'
 
 
 class ExcludedFDA(FactDataModel):
-    fexcludedfda = CharField(column_name='fExcludedFDA', unique=True)
-    fexcludedfdakey = PrimaryKeyField(column_name='fExcludedFDAKEY')
-    fexcludedfdaname = CharField(column_name='fExcludedFDAName', unique=True)
+    fexcludedfda = CharField(db_column='fExcludedFDA', unique=True)
+    fexcludedfdakey = PrimaryKeyField(db_column='fExcludedFDAKEY')
+    fexcludedfdaname = CharField(db_column='fExcludedFDAName', unique=True)
 
     class Meta:
-        table_name = 'ExcludedFDA'
+        db_table = 'ExcludedFDA'
 
 
 class FillCalibStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fsequenceid = IntegerField(column_name='fSequenceID')
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fsequenceid = IntegerField(db_column='fSequenceID')
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'FillCalibStatus'
+        db_table = 'FillCalibStatus'
         indexes = (
             (('fnight', 'fsequenceid'), True),
         )
@@ -286,18 +308,18 @@ class FillCalibStatus(FactDataModel):
 
 
 class FillStarStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fsequenceid = IntegerField(column_name='fSequenceID')
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fsequenceid = IntegerField(db_column='fSequenceID')
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'FillStarStatus'
+        db_table = 'FillStarStatus'
         indexes = (
             (('fnight', 'fsequenceid'), True),
         )
@@ -305,111 +327,111 @@ class FillStarStatus(FactDataModel):
 
 
 class MeasurementType(FactDataModel):
-    fisunlimited = IntegerField(column_name='fIsUnlimited')
-    fmeasurementtype = CharField(column_name='fMeasurementType')
-    fmeasurementtypekey = PrimaryKeyField(column_name='fMeasurementTypeKey')
-    fmeasurementtypename = CharField(column_name='fMeasurementTypeName', unique=True)
-    fneedssource = IntegerField(column_name='fNeedsSource')
+    fisunlimited = IntegerField(db_column='fIsUnlimited')
+    fmeasurementtype = CharField(db_column='fMeasurementType')
+    fmeasurementtypekey = PrimaryKeyField(db_column='fMeasurementTypeKey')
+    fmeasurementtypename = CharField(db_column='fMeasurementTypeName', unique=True)
+    fneedssource = IntegerField(db_column='fNeedsSource')
 
     class Meta:
-        table_name = 'MeasurementType'
+        db_table = 'MeasurementType'
 
 
 class ObservationTimes(FactDataModel):
-    fmjd = IntegerField(column_name='fMjd')
-    fmoonrise = DateTimeField(column_name='fMoonRise')
-    fmoonset = DateTimeField(column_name='fMoonSet')
-    fnight = PrimaryKeyField(column_name='fNight')
-    fnumdarkhours = FloatField(column_name='fNumDarkHours')
-    fstartdarknight = DateTimeField(column_name='fStartDarkNight')
-    fstartdarktime = DateTimeField(column_name='fStartDarkTime')
-    fstartobservation = DateTimeField(column_name='fStartObservation')
-    fstopdarknight = DateTimeField(column_name='fStopDarkNight')
-    fstopdarktime = DateTimeField(column_name='fStopDarkTime')
-    fstopobservation = DateTimeField(column_name='fStopObservation')
+    fmjd = IntegerField(db_column='fMjd')
+    fmoonrise = DateTimeField(db_column='fMoonRise')
+    fmoonset = DateTimeField(db_column='fMoonSet')
+    fnight = PrimaryKeyField(db_column='fNight')
+    fnumdarkhours = FloatField(db_column='fNumDarkHours')
+    fstartdarknight = DateTimeField(db_column='fStartDarkNight')
+    fstartdarktime = DateTimeField(db_column='fStartDarkTime')
+    fstartobservation = DateTimeField(db_column='fStartObservation')
+    fstopdarknight = DateTimeField(db_column='fStopDarkNight')
+    fstopdarktime = DateTimeField(db_column='fStopDarkTime')
+    fstopobservation = DateTimeField(db_column='fStopObservation')
 
     class Meta:
-        table_name = 'ObservationTimes'
+        db_table = 'ObservationTimes'
 
 
 class Observatory(FactDataModel):
-    fmagnetbx = FloatField(column_name='fMagnetBX', null=True)
-    fmagnetbz = FloatField(column_name='fMagnetBZ', null=True)
-    fmagnetrotation = FloatField(column_name='fMagnetRotation', null=True)
-    fobslevel = IntegerField(column_name='fObsLevel')
-    fobservatory = CharField(column_name='fObservatory')
-    fobservatorykey = PrimaryKeyField(column_name='fObservatoryKEY')
-    fobservatoryname = CharField(column_name='fObservatoryName')
+    fmagnetbx = FloatField(db_column='fMagnetBX', null=True)
+    fmagnetbz = FloatField(db_column='fMagnetBZ', null=True)
+    fmagnetrotation = FloatField(db_column='fMagnetRotation', null=True)
+    fobslevel = IntegerField(db_column='fObsLevel')
+    fobservatory = CharField(db_column='fObservatory')
+    fobservatorykey = PrimaryKeyField(db_column='fObservatoryKEY')
+    fobservatoryname = CharField(db_column='fObservatoryName')
 
     class Meta:
-        table_name = 'Observatory'
+        db_table = 'Observatory'
 
 
 class RatesFileAvailISDCStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = PrimaryKeyField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = PrimaryKeyField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'RatesFileAvailISDCStatus'
+        db_table = 'RatesFileAvailISDCStatus'
 
 
 class RatesFileAvailWueStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = PrimaryKeyField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = PrimaryKeyField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'RatesFileAvailWueStatus'
+        db_table = 'RatesFileAvailWueStatus'
 
 
 class RateScan(FactDataModel):
-    fazmax = FloatField(column_name='fAzMax')
-    fazmin = FloatField(column_name='fAzMin')
-    fcurrentmedmean = FloatField(column_name='fCurrentMedMean', null=True)
-    fdecmean = FloatField(column_name='fDecMean')
-    fnight = IntegerField(column_name='fNight')
-    fnumpoints = IntegerField(column_name='fNumPoints', null=True)
-    fovervoltage = FloatField(column_name='fOvervoltage', null=True)
-    framean = FloatField(column_name='fRaMean')
-    fratebegin = FloatField(column_name='fRateBegin')
-    frateend = FloatField(column_name='fRateEnd')
-    fratescanid = PrimaryKeyField(column_name='fRatescanID')
-    fthresholdbegin = IntegerField(column_name='fThresholdBegin')
-    fthresholdend = IntegerField(column_name='fThresholdEnd')
-    ftimebegin = DateTimeField(column_name='fTimeBegin')
-    ftimeend = DateTimeField(column_name='fTimeEnd')
-    fvoltageison = IntegerField(column_name='fVoltageIsOn', null=True)
-    fzdmax = FloatField(column_name='fZdMax')
-    fzdmin = FloatField(column_name='fZdMin')
+    fazmax = FloatField(db_column='fAzMax')
+    fazmin = FloatField(db_column='fAzMin')
+    fcurrentmedmean = FloatField(db_column='fCurrentMedMean', null=True)
+    fdecmean = FloatField(db_column='fDecMean')
+    fnight = IntegerField(db_column='fNight')
+    fnumpoints = IntegerField(db_column='fNumPoints', null=True)
+    fovervoltage = FloatField(db_column='fOvervoltage', null=True)
+    framean = FloatField(db_column='fRaMean')
+    fratebegin = FloatField(db_column='fRateBegin')
+    frateend = FloatField(db_column='fRateEnd')
+    fratescanid = PrimaryKeyField(db_column='fRatescanID')
+    fthresholdbegin = IntegerField(db_column='fThresholdBegin')
+    fthresholdend = IntegerField(db_column='fThresholdEnd')
+    ftimebegin = DateTimeField(db_column='fTimeBegin')
+    ftimeend = DateTimeField(db_column='fTimeEnd')
+    fvoltageison = IntegerField(db_column='fVoltageIsOn', null=True)
+    fzdmax = FloatField(db_column='fZdMax')
+    fzdmin = FloatField(db_column='fZdMin')
 
     class Meta:
-        table_name = 'Ratescan'
+        db_table = 'Ratescan'
 
 
 class RawFileAvailISDCStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    frunid = IntegerField(column_name='fRunID')
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    frunid = IntegerField(db_column='fRunID')
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'RawFileAvailISDCStatus'
+        db_table = 'RawFileAvailISDCStatus'
         indexes = (
             (('fnight', 'frunid'), True),
         )
@@ -417,18 +439,18 @@ class RawFileAvailISDCStatus(FactDataModel):
 
 
 class RawFileAvailWueStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    frunid = IntegerField(column_name='fRunID')
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    frunid = IntegerField(db_column='fRunID')
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'RawFileAvailWueStatus'
+        db_table = 'RawFileAvailWueStatus'
         indexes = (
             (('fnight', 'frunid'), True),
         )
@@ -436,18 +458,18 @@ class RawFileAvailWueStatus(FactDataModel):
 
 
 class RawfileRsyncedISDCStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    frunid = IntegerField(column_name='fRunID')
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    frunid = IntegerField(db_column='fRunID')
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'RawFileRsyncedISDCStatus'
+        db_table = 'RawFileRsyncedISDCStatus'
         indexes = (
             (('fnight', 'frunid'), True),
         )
@@ -455,114 +477,115 @@ class RawfileRsyncedISDCStatus(FactDataModel):
 
 
 class RunComments(FactDataModel):
-    fcomment = CharField(column_name='fComment', null=True)
-    fcommentkey = PrimaryKeyField(column_name='fCommentKEY')
-    fnight = IntegerField(column_name='fNight')
-    frunid = IntegerField(column_name='fRunID')
-    fuser = CharField(column_name='fUser', null=True)
+    fcomment = CharField(db_column='fComment', null=True)
+    fcommentkey = PrimaryKeyField(db_column='fCommentKEY')
+    fnight = IntegerField(db_column='fNight')
+    frunid = IntegerField(db_column='fRunID')
+    fuser = CharField(db_column='fUser', null=True)
 
     class Meta:
-        table_name = 'RunComments'
+        db_table = 'RunComments'
 
 
 class RunInfo(FactDataModel):
-    fangletomoon = FloatField(column_name='fAngleToMoon', null=True)
-    fangletosun = FloatField(column_name='fAngleToSun', null=True)
-    fazimuthmax = FloatField(column_name='fAzimuthMax', null=True)
-    fazimuthmean = FloatField(column_name='fAzimuthMean', null=True)
-    fazimuthmin = FloatField(column_name='fAzimuthMin', null=True)
-    fbiasvoltagemedian = FloatField(column_name='fBiasVoltageMedian', null=True)
-    fcamhumiditymean = FloatField(column_name='fCamHumidityMean', null=True)
-    fcameratempmean = FloatField(column_name='fCameraTempMean', null=True)
-    fcameratemprms = FloatField(column_name='fCameraTempRms', null=True)
-    fcameratemprmsmean = FloatField(column_name='fCameraTempRmsMean', null=True)
-    fchecksum = CharField(column_name='fCheckSum', null=True)
-    fcompiletime = DateTimeField(column_name='fCompileTime', null=True)
-    fcontainertempmean = FloatField(column_name='fContainerTempMean', null=True)
-    fctrldevmean = FloatField(column_name='fCtrlDevMean', null=True)
-    fctrldevrms = FloatField(column_name='fCtrlDevRms', null=True)
-    fcurrentsdevmean = FloatField(column_name='fCurrentsDevMean', null=True)
-    fcurrentsdevrms = FloatField(column_name='fCurrentsDevRms', null=True)
-    fcurrentsdifftoprediction = FloatField(column_name='fCurrentsDiffToPrediction', null=True)
-    fcurrentslinerms = FloatField(column_name='fCurrentsLineRms', null=True)
-    fcurrentsmedmean = FloatField(column_name='fCurrentsMedMean', null=True)
-    fcurrentsmedmeanbeg = FloatField(column_name='fCurrentsMedMeanBeg', null=True)
-    fcurrentsmedmeanend = FloatField(column_name='fCurrentsMedMeanEnd', null=True)
-    fcurrentsmedrms = FloatField(column_name='fCurrentsMedRms', null=True)
-    fcurrentsreldifftoprediction = FloatField(column_name='fCurrentsRelDiffToPrediction', null=True)
-    fcurrentsrellinerms = FloatField(column_name='fCurrentsRelLineRms', null=True)
-    fdatasum = CharField(column_name='fDataSum', null=True)
-    fdeclination = FloatField(column_name='fDeclination', null=True)
-    fdrsstep = IntegerField(column_name='fDrsStep', null=True)
-    fdrstempmaxmean = FloatField(column_name='fDrsTempMaxMean', null=True)
-    fdrstempmaxrmsmean = FloatField(column_name='fDrsTempMaxRmsMean', null=True)
-    fdrstempminmean = FloatField(column_name='fDrsTempMinMean', null=True)
-    fdrstempminrmsmean = FloatField(column_name='fDrsTempMinRmsMean', null=True)
-    feffectiveon = FloatField(column_name='fEffectiveOn', null=True)
-    feffectiveonrms = FloatField(column_name='fEffectiveOnRms', null=True)
-    fexcludedfdakey = IntegerField(column_name='fExcludedFDAKEY', null=True)
-    ffilesize = BigIntegerField(column_name='fFileSize', null=True)
-    ffitsfileerrors = IntegerField(column_name='fFitsFileErrors')
-    fhasdrsfile = IntegerField(column_name='fHasDrsFile')
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    flidartransmission12 = FloatField(column_name='fLidarTransmission12', null=True)
-    flidartransmission3 = FloatField(column_name='fLidarTransmission3', null=True)
-    flidartransmission6 = FloatField(column_name='fLidarTransmission6', null=True)
-    flidartransmission9 = FloatField(column_name='fLidarTransmission9', null=True)
-    fmd5sumraw = CharField(column_name='fMd5sumRaw', null=True)
-    fmd5sumrawzip = CharField(column_name='fMd5sumRawZip', null=True)
-    fmoondisk = FloatField(column_name='fMoonDisk', null=True)
-    fmoonzenithdistance = FloatField(column_name='fMoonZenithDistance', null=True)
-    fnight = IntegerField(column_name='fNight')
-    fnumelptrigger = IntegerField(column_name='fNumELPTrigger', null=True)
-    fnumevents = IntegerField(column_name='fNumEvents', null=True)
-    fnumext1trigger = IntegerField(column_name='fNumExt1Trigger', null=True)
-    fnumext2trigger = IntegerField(column_name='fNumExt2Trigger', null=True)
-    fnumilptrigger = IntegerField(column_name='fNumILPTrigger', null=True)
-    fnumothertrigger = IntegerField(column_name='fNumOtherTrigger', null=True)
-    fnumpedestaltrigger = IntegerField(column_name='fNumPedestalTrigger', null=True)
-    fnumphysicstrigger = IntegerField(column_name='fNumPhysicsTrigger', null=True)
-    fnumtimetrigger = IntegerField(column_name='fNumTimeTrigger', null=True)
-    fontime = FloatField(column_name='fOnTime', null=True)
-    foutsidetempmean = FloatField(column_name='fOutsideTempMean', null=True)
-    foutsidetemprms = FloatField(column_name='fOutsideTempRms', null=True)
-    fperiod = IntegerField(column_name='fPeriod', null=True)
-    froi = IntegerField(column_name='fROI')
-    froitimemarker = IntegerField(column_name='fROITimeMarker', null=True)
-    frevisionnumber = CharField(column_name='fRevisionNumber', null=True)
-    frightascension = FloatField(column_name='fRightAscension', null=True)
-    frunid = IntegerField(column_name='fRunID')
-    frunstart = DateTimeField(column_name='fRunStart', null=True)
-    frunstop = DateTimeField(column_name='fRunStop', null=True)
-    fruntypekey = IntegerField(column_name='fRunTypeKey')
-    fsequenceid = IntegerField(column_name='fSequenceID', null=True)
-    fsourcekey = IntegerField(column_name='fSourceKEY', null=True)
-    fsqmmaglinfitchi2 = FloatField(column_name='fSqmMagLinFitChi2', null=True)
-    fsqmmaglinfitndf = IntegerField(column_name='fSqmMagLinFitNdf', null=True)
-    fsqmmaglinfitpvalue = FloatField(column_name='fSqmMagLinFitPValue', null=True)
-    fsqmmaglinfitslope = FloatField(column_name='fSqmMagLinFitSlope', null=True)
-    fsqmmagmean = FloatField(column_name='fSqmMagMean', null=True)
-    fsunzenithdistance = FloatField(column_name='fSunZenithDistance', null=True)
-    ftngdust = FloatField(column_name='fTNGDust', null=True)
-    fthresholdavgmean = FloatField(column_name='fThresholdAvgMean', null=True)
-    fthresholdmax = IntegerField(column_name='fThresholdMax', null=True)
-    fthresholdmedmean = FloatField(column_name='fThresholdMedMean', null=True)
-    fthresholdmedrms = FloatField(column_name='fThresholdMedRms', null=True)
-    fthresholdmedian = FloatField(column_name='fThresholdMedian', null=True)
-    fthresholdminset = IntegerField(column_name='fThresholdMinSet', null=True)
-    fthresholdmintimediff = IntegerField(column_name='fThresholdMinTimeDiff', null=True)
-    ftriggerratemedian = FloatField(column_name='fTriggerRateMedian', null=True)
-    ftriggerraterms = FloatField(column_name='fTriggerRateRms', null=True)
-    ftriggerratetimeover100 = FloatField(column_name='fTriggerRateTimeOver100', null=True)
-    ftriggerratetimeover125 = FloatField(column_name='fTriggerRateTimeOver125', null=True)
-    ftriggerratetimeover150 = FloatField(column_name='fTriggerRateTimeOver150', null=True)
-    ftriggerratetimeover175 = FloatField(column_name='fTriggerRateTimeOver175', null=True)
-    fzenithdistancemax = FloatField(column_name='fZenithDistanceMax', null=True)
-    fzenithdistancemean = FloatField(column_name='fZenithDistanceMean', null=True)
-    fzenithdistancemin = FloatField(column_name='fZenithDistanceMin', null=True)
+    fangletomoon = FloatField(db_column='fAngleToMoon', null=True)
+    fangletosun = FloatField(db_column='fAngleToSun', null=True)
+    fazimuthmax = FloatField(db_column='fAzimuthMax', null=True)
+    fazimuthmean = FloatField(db_column='fAzimuthMean', null=True)
+    fazimuthmin = FloatField(db_column='fAzimuthMin', null=True)
+    fbiasvoltagemedian = FloatField(db_column='fBiasVoltageMedian', null=True)
+    fcamhumiditymean = FloatField(db_column='fCamHumidityMean', null=True)
+    fcameratempmean = FloatField(db_column='fCameraTempMean', null=True)
+    fcameratemprms = FloatField(db_column='fCameraTempRms', null=True)
+    fcameratemprmsmean = FloatField(db_column='fCameraTempRmsMean', null=True)
+    fchecksum = CharField(db_column='fCheckSum', null=True)
+    fcompiletime = DateTimeField(db_column='fCompileTime', null=True)
+    fcontainertempmean = FloatField(db_column='fContainerTempMean', null=True)
+    fctrldevmean = FloatField(db_column='fCtrlDevMean', null=True)
+    fctrldevrms = FloatField(db_column='fCtrlDevRms', null=True)
+    fcurrentsdevmean = FloatField(db_column='fCurrentsDevMean', null=True)
+    fcurrentsdevrms = FloatField(db_column='fCurrentsDevRms', null=True)
+    fcurrentsdifftoprediction = FloatField(db_column='fCurrentsDiffToPrediction', null=True)
+    fcurrentslinerms = FloatField(db_column='fCurrentsLineRms', null=True)
+    fcurrentsmedmean = FloatField(db_column='fCurrentsMedMean', null=True)
+    fcurrentsmedmeanbeg = FloatField(db_column='fCurrentsMedMeanBeg', null=True)
+    fcurrentsmedmeanend = FloatField(db_column='fCurrentsMedMeanEnd', null=True)
+    fcurrentsmedrms = FloatField(db_column='fCurrentsMedRms', null=True)
+    fcurrentsreldifftoprediction = FloatField(db_column='fCurrentsRelDiffToPrediction', null=True)
+    fcurrentsrellinerms = FloatField(db_column='fCurrentsRelLineRms', null=True)
+    fdatasum = CharField(db_column='fDataSum', null=True)
+    fdeclination = FloatField(db_column='fDeclination', null=True)
+    fdrsstep = IntegerField(db_column='fDrsStep', null=True)
+    fdrstempmaxmean = FloatField(db_column='fDrsTempMaxMean', null=True)
+    fdrstempmaxrmsmean = FloatField(db_column='fDrsTempMaxRmsMean', null=True)
+    fdrstempminmean = FloatField(db_column='fDrsTempMinMean', null=True)
+    fdrstempminrmsmean = FloatField(db_column='fDrsTempMinRmsMean', null=True)
+    feffectiveon = FloatField(db_column='fEffectiveOn', null=True)
+    feffectiveonrms = FloatField(db_column='fEffectiveOnRms', null=True)
+    fexcludedfdakey = IntegerField(db_column='fExcludedFDAKEY', null=True)
+    ffilesize = BigIntegerField(db_column='fFileSize', null=True)
+    ffitsfileerrors = IntegerField(db_column='fFitsFileErrors')
+    fhasdrsfile = IntegerField(db_column='fHasDrsFile')
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    flidartransmission12 = FloatField(db_column='fLidarTransmission12', null=True)
+    flidartransmission3 = FloatField(db_column='fLidarTransmission3', null=True)
+    flidartransmission6 = FloatField(db_column='fLidarTransmission6', null=True)
+    flidartransmission9 = FloatField(db_column='fLidarTransmission9', null=True)
+    fmd5sumraw = CharField(db_column='fMd5sumRaw', null=True)
+    fmd5sumrawzip = CharField(db_column='fMd5sumRawZip', null=True)
+    fmoondisk = FloatField(db_column='fMoonDisk', null=True)
+    fmoonzenithdistance = FloatField(db_column='fMoonZenithDistance', null=True)
+    fnight = IntegerField(db_column='fNight')
+    fnumelptrigger = IntegerField(db_column='fNumELPTrigger', null=True)
+    fnumevents = IntegerField(db_column='fNumEvents', null=True)
+    fnumext1trigger = IntegerField(db_column='fNumExt1Trigger', null=True)
+    fnumext2trigger = IntegerField(db_column='fNumExt2Trigger', null=True)
+    fnumilptrigger = IntegerField(db_column='fNumILPTrigger', null=True)
+    fnumothertrigger = IntegerField(db_column='fNumOtherTrigger', null=True)
+    fnumpedestaltrigger = IntegerField(db_column='fNumPedestalTrigger', null=True)
+    fnumphysicstrigger = IntegerField(db_column='fNumPhysicsTrigger', null=True)
+    fnumtimetrigger = IntegerField(db_column='fNumTimeTrigger', null=True)
+    fontime = FloatField(db_column='fOnTime', null=True)
+    foutsidetempmean = FloatField(db_column='fOutsideTempMean', null=True)
+    foutsidetemprms = FloatField(db_column='fOutsideTempRms', null=True)
+    fperiod = IntegerField(db_column='fPeriod', null=True)
+    froi = IntegerField(db_column='fROI')
+    froitimemarker = IntegerField(db_column='fROITimeMarker', null=True)
+    frevisionnumber = CharField(db_column='fRevisionNumber', null=True)
+    frightascension = FloatField(db_column='fRightAscension', null=True)
+    frunid = IntegerField(db_column='fRunID')
+    frunstart = DateTimeField(db_column='fRunStart', null=True)
+    frunstop = DateTimeField(db_column='fRunStop', null=True)
+    fruntypekey = IntegerField(db_column='fRunTypeKey')
+    fsequenceid = IntegerField(db_column='fSequenceID', null=True)
+    fsourcekey = IntegerField(db_column='fSourceKEY', null=True)
+    fsqmmaglinfitchi2 = FloatField(db_column='fSqmMagLinFitChi2', null=True)
+    fsqmmaglinfitndf = IntegerField(db_column='fSqmMagLinFitNdf', null=True)
+    fsqmmaglinfitpvalue = FloatField(db_column='fSqmMagLinFitPValue', null=True)
+    fsqmmaglinfitslope = FloatField(db_column='fSqmMagLinFitSlope', null=True)
+    fsqmmagmean = FloatField(db_column='fSqmMagMean', null=True)
+    fsunzenithdistance = FloatField(db_column='fSunZenithDistance', null=True)
+    ftngdust = FloatField(db_column='fTNGDust', null=True)
+    fthresholdavgmean = FloatField(db_column='fThresholdAvgMean', null=True)
+    fthresholdmax = IntegerField(db_column='fThresholdMax', null=True)
+    fthresholdmedmean = FloatField(db_column='fThresholdMedMean', null=True)
+    fthresholdmedrms = FloatField(db_column='fThresholdMedRms', null=True)
+    fthresholdmedian = FloatField(db_column='fThresholdMedian', null=True)
+    fthresholdminset = IntegerField(db_column='fThresholdMinSet', null=True)
+    fthresholdmintimediff = IntegerField(db_column='fThresholdMinTimeDiff', null=True)
+    ftriggerratemedian = FloatField(db_column='fTriggerRateMedian', null=True)
+    ftriggerraterms = FloatField(db_column='fTriggerRateRms', null=True)
+    ftriggerratetimeover100 = FloatField(db_column='fTriggerRateTimeOver100', null=True)
+    ftriggerratetimeover125 = FloatField(db_column='fTriggerRateTimeOver125', null=True)
+    ftriggerratetimeover150 = FloatField(db_column='fTriggerRateTimeOver150', null=True)
+    ftriggerratetimeover175 = FloatField(db_column='fTriggerRateTimeOver175', null=True)
+    fzenithdistancemax = FloatField(db_column='fZenithDistanceMax', null=True)
+    fzenithdistancemean = FloatField(db_column='fZenithDistanceMean', null=True)
+    fzenithdistancemin = FloatField(db_column='fZenithDistanceMin', null=True)
+    frealontime=fn.TIME_TO_SEC(fn.TIMEDIFF('fRunStop','fRunStart'))*'fEffectiveOn'
 
     class Meta:
-        table_name = 'RunInfo'
+        db_table = 'RunInfo'
         indexes = (
             (('fnight', 'frunid'), True),
         )
@@ -570,55 +593,55 @@ class RunInfo(FactDataModel):
 
 
 class RunType(FactDataModel):
-    fruntype = CharField(column_name='fRunType', unique=True)
-    fruntypekey = PrimaryKeyField(column_name='fRunTypeKEY')
-    fruntypename = CharField(column_name='fRunTypeName', unique=True)
+    fruntype = CharField(db_column='fRunType', unique=True)
+    fruntypekey = PrimaryKeyField(db_column='fRunTypeKEY')
+    fruntypename = CharField(db_column='fRunTypeName', unique=True)
 
     class Meta:
-        table_name = 'RunType'
+        db_table = 'RunType'
 
 
 class Schedule(FactDataModel):
-    fdata = CharField(column_name='fData', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fmeasurementid = IntegerField(column_name='fMeasurementID')
-    fmeasurementtypekey = IntegerField(column_name='fMeasurementTypeKey')
-    fscheduleid = PrimaryKeyField(column_name='fScheduleID')
-    fsourcekey = IntegerField(column_name='fSourceKey', null=True)
-    fstart = DateTimeField(column_name='fStart')
-    fuser = CharField(column_name='fUser')
+    fdata = CharField(db_column='fData', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fmeasurementid = IntegerField(db_column='fMeasurementID')
+    fmeasurementtypekey = IntegerField(db_column='fMeasurementTypeKey')
+    fscheduleid = PrimaryKeyField(db_column='fScheduleID')
+    fsourcekey = IntegerField(db_column='fSourceKey', null=True)
+    fstart = DateTimeField(db_column='fStart')
+    fuser = CharField(db_column='fUser')
 
     class Meta:
-        table_name = 'Schedule'
+        db_table = 'Schedule'
         indexes = (
             (('fstart', 'fmeasurementid'), True),
         )
 
 
 class SequenceComments(FactDataModel):
-    fcomment = CharField(column_name='fComment', null=True)
-    fcommentkey = PrimaryKeyField(column_name='fCommentKEY')
-    fnight = IntegerField(column_name='fNight')
-    fsequenceid = IntegerField(column_name='fSequenceID')
-    fuser = CharField(column_name='fUser', null=True)
+    fcomment = CharField(db_column='fComment', null=True)
+    fcommentkey = PrimaryKeyField(db_column='fCommentKEY')
+    fnight = IntegerField(db_column='fNight')
+    fsequenceid = IntegerField(db_column='fSequenceID')
+    fuser = CharField(db_column='fUser', null=True)
 
     class Meta:
-        table_name = 'SequenceComments'
+        db_table = 'SequenceComments'
 
 
 class SequenceFileAvailISDCStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fsequenceid = IntegerField(column_name='fSequenceID')
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fsequenceid = IntegerField(db_column='fSequenceID')
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'SequenceFileAvailISDCStatus'
+        db_table = 'SequenceFileAvailISDCStatus'
         indexes = (
             (('fnight', 'fsequenceid'), True),
         )
@@ -626,18 +649,18 @@ class SequenceFileAvailISDCStatus(FactDataModel):
 
 
 class SequenceFileAVAILWueStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fsequenceid = IntegerField(column_name='fSequenceID')
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fsequenceid = IntegerField(db_column='fSequenceID')
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'SequenceFileAvailWueStatus'
+        db_table = 'SequenceFileAvailWueStatus'
         indexes = (
             (('fnight', 'fsequenceid'), True),
         )
@@ -645,21 +668,21 @@ class SequenceFileAVAILWueStatus(FactDataModel):
 
 
 class SequenceInfo(FactDataModel):
-    fazimuthmax = FloatField(column_name='fAzimuthMax', null=True)
-    fazimuthmin = FloatField(column_name='fAzimuthMin', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fnumevents = IntegerField(column_name='fNumEvents')
-    fsequenceduration = IntegerField(column_name='fSequenceDuration')
-    fsequenceid = IntegerField(column_name='fSequenceID')
-    fsequencestart = DateTimeField(column_name='fSequenceStart')
-    fsequencestop = DateTimeField(column_name='fSequenceStop')
-    fsourcekey = IntegerField(column_name='fSourceKEY')
-    fzenithdistancemax = FloatField(column_name='fZenithDistanceMax', null=True)
-    fzenithdistancemin = FloatField(column_name='fZenithDistanceMin', null=True)
+    fazimuthmax = FloatField(db_column='fAzimuthMax', null=True)
+    fazimuthmin = FloatField(db_column='fAzimuthMin', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fnumevents = IntegerField(db_column='fNumEvents')
+    fsequenceduration = IntegerField(db_column='fSequenceDuration')
+    fsequenceid = IntegerField(db_column='fSequenceID')
+    fsequencestart = DateTimeField(db_column='fSequenceStart')
+    fsequencestop = DateTimeField(db_column='fSequenceStop')
+    fsourcekey = IntegerField(db_column='fSourceKEY')
+    fzenithdistancemax = FloatField(db_column='fZenithDistanceMax', null=True)
+    fzenithdistancemin = FloatField(db_column='fZenithDistanceMin', null=True)
 
     class Meta:
-        table_name = 'SequenceInfo'
+        db_table = 'SequenceInfo'
         indexes = (
             (('fnight', 'fsequenceid'), True),
         )
@@ -667,40 +690,40 @@ class SequenceInfo(FactDataModel):
 
 
 class Source(FactDataModel):
-    fdeclination = FloatField(column_name='fDeclination')
-    fepochkey = IntegerField(column_name='fEpochKEY', null=True)
-    fflux = FloatField(column_name='fFlux', null=True)
-    fistoo = IntegerField(column_name='fIsToO')
-    fmagnitude = FloatField(column_name='fMagnitude', null=True)
-    frightascension = FloatField(column_name='fRightAscension')
-    fslope = FloatField(column_name='fSlope', null=True)
-    fsourcekey = PrimaryKeyField(column_name='fSourceKEY')
-    fsourcename = CharField(column_name='fSourceName')
-    fsourcetypekey = IntegerField(column_name='fSourceTypeKey', index=True)
-    fwobbleangle0 = IntegerField(column_name='fWobbleAngle0')
-    fwobbleangle1 = IntegerField(column_name='fWobbleAngle1')
-    fwobbleoffset = FloatField(column_name='fWobbleOffset')
+    fdeclination = FloatField(db_column='fDeclination')
+    fepochkey = IntegerField(db_column='fEpochKEY', null=True)
+    fflux = FloatField(db_column='fFlux', null=True)
+    fistoo = IntegerField(db_column='fIsToO')
+    fmagnitude = FloatField(db_column='fMagnitude', null=True)
+    frightascension = FloatField(db_column='fRightAscension')
+    fslope = FloatField(db_column='fSlope', null=True)
+    fsourcekey = PrimaryKeyField(db_column='fSourceKEY')
+    fsourcename = CharField(db_column='fSourceName')
+    fsourcetypekey = IntegerField(db_column='fSourceTypeKey', index=True)
+    fwobbleangle0 = IntegerField(db_column='fWobbleAngle0')
+    fwobbleangle1 = IntegerField(db_column='fWobbleAngle1')
+    fwobbleoffset = FloatField(db_column='fWobbleOffset')
 
     class Meta:
-        table_name = 'Source'
+        db_table = 'Source'
 
 
 class SourceType(FactDataModel):
-    fsourcetype = CharField(column_name='fSourceType', unique=True)
-    fsourcetypekey = PrimaryKeyField(column_name='fSourceTypeKEY')
-    fsourcetypename = CharField(column_name='fSourceTypeName', unique=True)
+    fsourcetype = CharField(db_column='fSourceType', unique=True)
+    fsourcetypekey = PrimaryKeyField(db_column='fSourceTypeKEY')
+    fsourcetypename = CharField(db_column='fSourceTypeName', unique=True)
 
     class Meta:
-        table_name = 'SourceType'
+        db_table = 'SourceType'
 
 
 class StarInfo(FactDataModel):
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fsequenceid = IntegerField(column_name='fSequenceID')
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fsequenceid = IntegerField(db_column='fSequenceID')
 
     class Meta:
-        table_name = 'StarInfo'
+        db_table = 'StarInfo'
         indexes = (
             (('fnight', 'fsequenceid'), True),
         )
@@ -708,18 +731,18 @@ class StarInfo(FactDataModel):
 
 
 class StarStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fsequenceid = IntegerField(column_name='fSequenceID')
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fsequenceid = IntegerField(db_column='fSequenceID')
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'StarStatus'
+        db_table = 'StarStatus'
         indexes = (
             (('fnight', 'fsequenceid'), True),
         )
@@ -727,18 +750,18 @@ class StarStatus(FactDataModel):
 
 
 class StarWueStatus(FactDataModel):
-    favailable = DateTimeField(column_name='fAvailable', null=True)
-    flastupdate = DateTimeField(column_name='fLastUpdate')
-    fnight = IntegerField(column_name='fNight')
-    fpriority = IntegerField(column_name='fPriority')
-    fprocessingsitekey = IntegerField(column_name='fProcessingSiteKEY', null=True)
-    freturncode = IntegerField(column_name='fReturnCode', null=True)
-    fsequenceid = IntegerField(column_name='fSequenceID')
-    fstarttime = DateTimeField(column_name='fStartTime', null=True)
-    fstoptime = DateTimeField(column_name='fStopTime', null=True)
+    favailable = DateTimeField(db_column='fAvailable', null=True)
+    flastupdate = DateTimeField(db_column='fLastUpdate')
+    fnight = IntegerField(db_column='fNight')
+    fpriority = IntegerField(db_column='fPriority')
+    fprocessingsitekey = IntegerField(db_column='fProcessingSiteKEY', null=True)
+    freturncode = IntegerField(db_column='fReturnCode', null=True)
+    fsequenceid = IntegerField(db_column='fSequenceID')
+    fstarttime = DateTimeField(db_column='fStartTime', null=True)
+    fstoptime = DateTimeField(db_column='fStopTime', null=True)
 
     class Meta:
-        table_name = 'StarWueStatus'
+        db_table = 'StarWueStatus'
         indexes = (
             (('fnight', 'fsequenceid'), True),
         )
@@ -746,36 +769,36 @@ class StarWueStatus(FactDataModel):
 
 
 class TPointData(FactDataModel):
-    fazencoder = FloatField(column_name='fAzEncoder')
-    fazimage = FloatField(column_name='fAzImage')
-    faznominal = FloatField(column_name='fAzNominal')
-    fdeclination = FloatField(column_name='fDeclination')
-    fintensity = FloatField(column_name='fIntensity')
-    fmagcatalog = FloatField(column_name='fMagCatalog')
-    fmagmeasured = FloatField(column_name='fMagMeasured')
-    fnumleds = IntegerField(column_name='fNumLEDs')
-    fnumrings = IntegerField(column_name='fNumRings')
-    fqualitykey = IntegerField(column_name='fQualityKEY')
-    frightascension = FloatField(column_name='fRightAscension')
-    fstarname = CharField(column_name='fStarName')
-    ftpointkey = PrimaryKeyField(column_name='fTPointKey')
-    ftimestamp = DateTimeField(column_name='fTimeStamp')
-    fxposcenter = FloatField(column_name='fXPosCenter')
-    fxposstar = FloatField(column_name='fXPosStar')
-    fyposcenter = FloatField(column_name='fYPosCenter')
-    fyposstar = FloatField(column_name='fYPosStar')
-    fzdencoder = FloatField(column_name='fZdEncoder')
-    fzdimage = FloatField(column_name='fZdImage')
-    fzdnominal = FloatField(column_name='fZdNominal')
+    fazencoder = FloatField(db_column='fAzEncoder')
+    fazimage = FloatField(db_column='fAzImage')
+    faznominal = FloatField(db_column='fAzNominal')
+    fdeclination = FloatField(db_column='fDeclination')
+    fintensity = FloatField(db_column='fIntensity')
+    fmagcatalog = FloatField(db_column='fMagCatalog')
+    fmagmeasured = FloatField(db_column='fMagMeasured')
+    fnumleds = IntegerField(db_column='fNumLEDs')
+    fnumrings = IntegerField(db_column='fNumRings')
+    fqualitykey = IntegerField(db_column='fQualityKEY')
+    frightascension = FloatField(db_column='fRightAscension')
+    fstarname = CharField(db_column='fStarName')
+    ftpointkey = PrimaryKeyField(db_column='fTPointKey')
+    ftimestamp = DateTimeField(db_column='fTimeStamp')
+    fxposcenter = FloatField(db_column='fXPosCenter')
+    fxposstar = FloatField(db_column='fXPosStar')
+    fyposcenter = FloatField(db_column='fYPosCenter')
+    fyposstar = FloatField(db_column='fYPosStar')
+    fzdencoder = FloatField(db_column='fZdEncoder')
+    fzdimage = FloatField(db_column='fZdImage')
+    fzdnominal = FloatField(db_column='fZdNominal')
 
     class Meta:
-        table_name = 'TPointData'
+        db_table = 'TPointData'
 
 
 class TPointQuality(FactDataModel):
-    fquality = CharField(column_name='fQuality', null=True, unique=True)
-    fqualitykey = PrimaryKeyField(column_name='fQualityKEY')
-    fqualityname = CharField(column_name='fQualityName', null=True, unique=True)
+    fquality = CharField(db_column='fQuality', null=True, unique=True)
+    fqualitykey = PrimaryKeyField(db_column='fQualityKEY')
+    fqualityname = CharField(db_column='fQualityName', null=True, unique=True)
 
     class Meta:
-        table_name = 'TPointQuality'
+        db_table = 'TPointQuality'
